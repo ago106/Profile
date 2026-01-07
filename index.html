@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Profile Page</title> <!-- Customize: Change page title here -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Background video or image: Uncomment video for video bg, or use CSS for image -->
+    <!-- <video autoplay muted loop class="background-video">
+        <source src="bg.mp4" type="video/mp4"> <!-- Add your video file -->
+    </video> -->
+
+    <div class="container">
+        <!-- Avatar section -->
+        <img class="avatar" src="avatar.png" alt="Your Avatar"> <!-- Add your avatar image file -->
+
+        <!-- Name and title (animated) -->
+        <h1 class="name animated-title">Your Name</h1> <!-- Customize: Your display name -->
+
+        <!-- Bio/description -->
+        <p class="bio">Days, weeks, months may pass — but our meeting is inevitable. ♥ However long it takes, we will wait for one another. ♡</p> <!-- Customize: Your bio text -->
+
+        <!-- Badges section (like Staff, Premium, etc. – add more as spans) -->
+        <div class="badges">
+            <span class="badge premium">💎 Premium</span>
+            <span class="badge staff">✨ Staff</span>
+            <span class="badge donor">💰 Donor</span>
+            <span class="badge verified">✅ Verified</span>
+            <!-- Add more badges here, e.g., <span class="badge helper">🛠 Helper</span> -->
+        </div>
+
+        <!-- Social and custom links (add more <a> tags) -->
+        <div class="links">
+            <a href="https://github.com/yourusername" class="link-button">GitHub →</a>
+            <a href="https://discord.gg/yourinvite" class="link-button">Discord →</a>
+            <a href="https://t.me/yourchannel" class="link-button">Telegram Channel →</a>
+            <a href="https://youtube.com/yourchannel" class="link-button">YouTube →</a>
+            <!-- Add more links here, e.g., <a href="https://funpay.com" class="link-button">FunPay Shop →</a> -->
+        </div>
+
+        <!-- Music player (add more <source> for multiple songs) -->
+        <audio controls autoplay loop class="music-player"> <!-- Remove 'autoplay' if you don't want it to start automatically -->
+            <source src="song1.mp3" type="audio/mpeg"> <!-- Add your MP3 file -->
+            <source src="song2.mp3" type="audio/mpeg"> <!-- Add another song -->
+            Your browser does not support the audio element.
+        </audio>
+
+        <!-- View count placeholder (static – edit the number) -->
+        <div class="views">Total Views: 683</div> <!-- Customize: Update the number manually -->
+
+        <!-- Media embed example (e.g., YouTube – add iframe or embed code) -->
+        <div class="media-embed">
+            <iframe width="560" height="315" src="https://www.youtube.com/embed/yourvideoID" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe> <!-- Customize: Replace with your embed URL -->
+        </div>
+    </div>
+</body>
+</html>
