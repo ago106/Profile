@@ -5,72 +5,74 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Agushenka</title>
     <link rel="stylesheet" href="style.css">
-    <!-- Добавляем шрифт Lexend -->
     <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
-    <!-- Background Video -->
+    <!-- Background Video/Audio -->
     <video class="background" autoplay muted loop playsinline>
         <source src="assets/background.mp4" type="video/mp4">
         <!-- Fallback если видео не поддерживается -->
-        <img src="assets/fallback-background.jpg" alt="Background">
     </video>
+    
+    <!-- Фоновая музыка -->
+    <audio id="bg-music" autoplay loop>
+        <source src="assets/audio/unhappy.mp3" type="audio/mpeg">
+    </audio>
 
     <!-- Profile Container -->
     <div class="profile">
-        <img class="avatar" src="assets/avatar.png" alt="Avatar">
+        <div class="avatar-container">
+            <img class="avatar" src="assets/avatar.png" alt="Avatar" onerror="this.style.display='none'">
+        </div>
+        
         <h1 class="animated-title">Agushenka</h1>
         <p class="description typing"></p>
         
         <div class="socials">
-            <a href="https://discord.gg/example" target="_blank"><img src="assets/discord.png" alt="Discord"></a>
-            <a href="https://youtube.com/example" target="_blank"><img src="assets/youtube.png" alt="YouTube"></a>
-            <a href="https://example.com" target="_blank"><img src="assets/other.png" alt="Other"></a>
+            <a href="https://discord.gg/example" target="_blank" class="social-icon">
+                <img src="assets/discord.png" alt="Discord" onerror="this.parentElement.style.display='none'">
+            </a>
+            <a href="https://youtube.com/example" target="_blank" class="social-icon">
+                <img src="assets/youtube.png" alt="YouTube" onerror="this.parentElement.style.display='none'">
+            </a>
+            <a href="https://example.com" target="_blank" class="social-icon">
+                <img src="assets/other.png" alt="Other" onerror="this.parentElement.style.display='none'">
+            </a>
         </div>
         
         <div class="custom-links">
             <a href="https://github.com/ago106" class="link" target="_blank">
-                <img src="assets/github.png" alt="GitHub"> GitHub
+                <span class="link-icon">👨‍💻</span>
+                <span class="link-text">GitHub</span>
             </a>
             <a href="https://funpay.com" class="link" target="_blank">
-                <img src="assets/funpay.png" alt="FunPay"> FunPay Shop
+                <span class="link-icon">🛒</span>
+                <span class="link-text">FunPay Shop</span>
             </a>
             <a href="https://t.me/donutsmp" class="link" target="_blank">
-                <img src="assets/telegram.png" alt="Telegram"> My Telegram
+                <span class="link-icon">💬</span>
+                <span class="link-text">My Telegram</span>
             </a>
             <a href="https://t.me/agush3nka" class="link" target="_blank">
-                <img src="assets/telegram.png" alt="Telegram"> Telegram Channel
+                <span class="link-icon">📢</span>
+                <span class="link-text">Telegram Channel</span>
             </a>
-        </div>
-        
-        <div class="music-player">
-            <audio id="audio" loop>
-                <source src="assets/audio/unhappy.mp3" type="audio/mpeg">
-                Your browser does not support the audio element.
-            </audio>
-            <button id="play-pause">▶ Play</button>
-            <select id="song-select">
-                <option value="assets/audio/unhappy.mp3">Its A Dream</option>
-                <!-- Добавьте больше треков здесь -->
-            </select>
         </div>
         
         <div class="view-count">
             Views: 
-            <img src="https://views-counter.vercel.app/counter?page_id=agushenka-profile&style=flat" alt="Profile Views">
+            <span class="counter">Loading...</span>
         </div>
         
         <div class="discord-widget">
-            <p>Discord Server: <span id="discord-online">0</span> Online / <span id="discord-members">12,260</span> Members</p>
-            <a href="https://discord.gg/example" target="_blank">
-                <img src="https://discord.com/api/guilds/1406607908577218681/widget.png?style=shield" alt="Join Server">
+            <p>Discord Server: <span id="discord-online">0</span> Online</p>
+            <a href="https://discord.gg/example" target="_blank" class="discord-button">
+                Join Server
             </a>
         </div>
         
-        <div class="achievements">
-            <img src="assets/badge1.png" alt="Achievement 1" class="badge">
-            <img src="assets/badge2.png" alt="Achievement 2" class="badge">
-            <!-- Add more badges/achievements here -->
+        <div class="achievements" id="achievements-container">
+            <!-- Achievements will be added by JS if images exist -->
         </div>
     </div>
 
