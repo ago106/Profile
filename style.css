@@ -5,6 +5,7 @@ body {
     background-color: #0A0A1A;
     color: #E0E0FF;
     overflow: hidden;
+    cursor: url('assets/custom_cursor.png'), auto;
 }
 
 .background {
@@ -78,15 +79,40 @@ body {
 
 .animated-title {
     font-size: 32px;
-    color: #00CED1;
-    animation: glitch 1s infinite;
-    text-shadow: 0 0 5px #00CED1;
+    display: flex;
+    justify-content: center;
+    gap: 5px;
+    margin: 20px 0;
 }
 
-@keyframes glitch {
-    0% { text-shadow: 2px 2px #FF6B9E, -2px -2px #00CED1; }
-    50% { text-shadow: -2px 2px #00CED1, 2px -2px #FF6B9E; }
-    100% { text-shadow: 2px 2px #FF6B9E, -2px -2px #00CED1; }
+.animated-title span {
+    display: inline-block;
+    color: #00CED1;
+    text-shadow: 0 0 5px #00CED1;
+    animation: letterGlow 2s infinite;
+}
+
+.animated-title span:nth-child(1) { animation-delay: 0.1s; }
+.animated-title span:nth-child(2) { animation-delay: 0.2s; }
+.animated-title span:nth-child(3) { animation-delay: 0.3s; }
+.animated-title span:nth-child(4) { animation-delay: 0.4s; }
+.animated-title span:nth-child(5) { animation-delay: 0.5s; }
+.animated-title span:nth-child(6) { animation-delay: 0.6s; }
+.animated-title span:nth-child(7) { animation-delay: 0.7s; }
+.animated-title span:nth-child(8) { animation-delay: 0.8s; }
+.animated-title span:nth-child(9) { animation-delay: 0.9s; }
+
+@keyframes letterGlow {
+    0%, 100% {
+        color: #00CED1;
+        text-shadow: 0 0 5px #00CED1, 0 0 10px #00CED1;
+        transform: translateY(0);
+    }
+    50% {
+        color: #FF6B9E;
+        text-shadow: 0 0 10px #FF6B9E, 0 0 20px #FF6B9E;
+        transform: translateY(-5px);
+    }
 }
 
 .description {
