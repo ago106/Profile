@@ -1,75 +1,82 @@
 document.addEventListener('DOMContentLoaded', function() {
-    // Элементы DOM
-    const settingsPanel = document.getElementById('settingsPanel');
-    const openSettingsBtn = document.getElementById('openSettings');
-    const closeSettingsBtn = document.getElementById('closeSettings');
-    const themeSelect = document.getElementById('themeSelect');
-    const bgImageInput = document.getElementById('bgImageInput');
-    const musicInput = document.getElementById('musicInput');
-    const autoPlayCheckbox = document.getElementById('autoPlayCheckbox');
-    const telegramInput = document.getElementById('telegramInput');
-    const discordInput = document.getElementById('discordInput');
-    const saveSettingsBtn = document.getElementById('saveSettings');
-    const resetSettingsBtn = document.getElementById('resetSettings');
-    const toggleMusicBtn = document.getElementById('toggleMusic');
-    const musicStatus = document.getElementById('musicStatus');
-    const backgroundMusic = document.getElementById('backgroundMusic');
-    const playPauseBtn = document.getElementById('playPauseBtn');
-    const playIcon = document.getElementById('playIcon');
-    const volumeSlider = document.getElementById('volumeSlider');
-    const progressSlider = document.getElementById('progressSlider');
-    const badgesContainer = document.getElementById('badgesContainer');
-    const badgesCount = document.getElementById('badgesCount');
-    const linksContainer = document.getElementById('linksContainer');
-    const headerBackground = document.getElementById('headerBackground');
-    const viewCountElement = document.getElementById('viewCount');
-    const currentYear = document.getElementById('currentYear');
-    
-    // Установка текущего года в футере
-    currentYear.textContent = new Date().getFullYear();
-    
-    // Инициализация просмотров
-    let views = localStorage.getItem('profileViews') || 1248;
-    viewCountElement.textContent = numberWithCommas(views);
-    
-    // Увеличиваем счетчик просмотров при загрузке страницы
-    views = parseInt(views) + 1;
-    localStorage.setItem('profileViews', views);
-    viewCountElement.textContent = numberWithCommas(views);
-    
-    // Данные значков
-    const badgesData = [
-        { id: 1, name: 'Verified', description: 'Проверенный пользователь', color: '#10b981', icon: 'fas fa-check-circle' },
-        { id: 2, name: 'Premium', description: 'Премиум подписка', color: '#f59e0b', icon: 'fas fa-crown' },
-        { id: 3, name: 'Donor', description: 'Пожертвовал 10€+', color: '#ef4444', icon: 'fas fa-heart' },
-        { id: 4, name: 'Bug Hunter', description: 'Сообщил об ошибке', color: '#8b5cf6', icon: 'fas fa-bug' },
-        { id: 5, name: 'Early Supporter', description: 'Ранний сторонник', color: '#06b6d4', icon: 'fas fa-star' },
-        { id: 6, name: 'Staff', description: 'Команда проекта', color: '#3b82f6', icon: 'fas fa-user-shield' },
-        { id: 7, name: 'Christmas 2024', description: 'Зимняя распродажа 2024', color: '#10b981', icon: 'fas fa-gift' },
-        { id: 8, name: 'Winner', description: 'Победитель события', color: '#f59e0b', icon: 'fas fa-trophy' }
-    ];
-    
-    // Данные ссылок
-    const linksData = [
-        { id: 1, title: 'Telegram Channel', description: 'Мой Telegram канал', url: 'https://t.me/ago106', icon: 'fab fa-telegram' },
-        { id: 2, title: 'Discord Server', description: 'Присоединяйтесь к нашему Discord', url: 'https://discord.gg/spacerb', icon: 'fab fa-discord' },
-        { id: 3, title: 'FunPay Shop', description: 'Мой магазин', url: '#', icon: 'fas fa-shopping-bag' }
-    ];
-    
-    // Функция форматирования чисел с запятыми
-    function numberWithCommas(x) {
-        return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-    }
-    
-    // Функция загрузки значков
-    function loadBadges() {
-        badgesContainer.innerHTML = '';
+    // Инициализация переменных
+    const elements = {
+        cursor: document.getElementById('customCursor'),
+        audio: document.getElementById('backgroundAudio'),
+        playPauseBtn: document.getElementById('playPauseBtn'),
+        nextTrackBtn: document.getElementById('nextTrackBtn'),
+        volumeSlider: document.getElementById('volumeSlider'),
+        viewCount: document.getElementById('viewCount'),
+        badgesGrid: document.getElementById('badgesGrid'),
+        socialsGrid: document.getElementById('socialsGrid'),
+        customLinksList: document.getElementById('customLinksList'),
+        mediaEmbed: document.getElementById('mediaEmbed'),
+        typingText: document.getElementById('typingText'),
+        username: document.getElementById('username'),
+        avatarWrapper: document.getElementById('avatarWrapper')
+    };
+
+    // Загрузка данных из localStorage
+    const loadSettings = () => {
+        // Загрузка цветовой темы
+        const theme = localStorage.getItem('theme') || 'dark';
+        document.body.className = `theme-${theme}`;
         
-        badgesData.forEach(badge => {
+        // Загрузка CSS переменных
+        const cssVars = JSON.parse(localStorage.getItem('cssVars') || '{}');
+        Object.keys(cssVars).forEach(key => {
+            document.documentElement.style.setProperty(key, cssVars[key]);
+        });
+        
+        // Загрузка просмотров
+        let views = parseInt(localStorage.getItem('views')) || 1847;
+        views++;
+        localStorage.setItem('views', views);
+        elements.viewCount.textContent = views.toLocaleString();
+        
+        // Загрузка значков
+        loadBadges();
+        
+        // Загрузка социальных сетей
+        loadSocials();
+        
+        // Загрузка кастомных ссылок
+        loadCustomLinks();
+        
+        // Загрузка медиа
+        loadMediaEmbed();
+        
+        // Загрузка музыки
+        loadMusicSettings();
+        
+        // Инициализация анимаций
+        initAnimations();
+    };
+
+    // Загрузка значков
+    const loadBadges = () => {
+        const badges = JSON.parse(localStorage.getItem('badges') || '[]');
+        
+        // Если нет сохраненных значков, используем стандартные
+        if (badges.length === 0) {
+            const defaultBadges = [
+                { name: 'Verified', description: 'Проверенный пользователь', icon: 'fas fa-check-circle', color: '#10b981' },
+                { name: 'Premium', description: 'Премиум подписка', icon: 'fas fa-crown', color: '#f59e0b' },
+                { name: 'Donor', description: 'Пожертвовал 10€+', icon: 'fas fa-heart', color: '#ef4444' },
+                { name: 'Bug Hunter', description: 'Сообщил об ошибке', icon: 'fas fa-bug', color: '#8b5cf6' },
+                { name: 'Staff', description: 'Команда проекта', icon: 'fas fa-user-shield', color: '#3b82f6' },
+                { name: 'Christmas 2024', description: 'Зимняя распродажа 2024', icon: 'fas fa-gift', color: '#10b981' }
+            ];
+            localStorage.setItem('badges', JSON.stringify(defaultBadges));
+            badges.push(...defaultBadges);
+        }
+        
+        elements.badgesGrid.innerHTML = '';
+        badges.forEach(badge => {
             const badgeElement = document.createElement('div');
             badgeElement.className = 'badge-item';
             badgeElement.innerHTML = `
-                <div class="badge-icon" style="background-color: ${badge.color}">
+                <div class="badge-icon" style="background: ${badge.color}">
                     <i class="${badge.icon}"></i>
                 </div>
                 <div class="badge-info">
@@ -77,226 +84,261 @@ document.addEventListener('DOMContentLoaded', function() {
                     <p>${badge.description}</p>
                 </div>
             `;
-            badgesContainer.appendChild(badgeElement);
+            elements.badgesGrid.appendChild(badgeElement);
         });
+    };
+
+    // Загрузка социальных сетей
+    const loadSocials = () => {
+        const socials = JSON.parse(localStorage.getItem('socials') || '[]');
         
-        badgesCount.textContent = badgesData.length;
-    }
-    
-    // Функция загрузки ссылок
-    function loadLinks() {
-        linksContainer.innerHTML = '';
+        if (socials.length === 0) {
+            const defaultSocials = [
+                { platform: 'telegram', url: 'https://t.me/agushenka', text: 'Telegram Channel', icon: 'fab fa-telegram' },
+                { platform: 'discord', url: 'https://discord.gg/example', text: 'Discord Server', icon: 'fab fa-discord' },
+                { platform: 'shop', url: '#', text: 'Runfoy Shop', icon: 'fas fa-shopping-bag' }
+            ];
+            localStorage.setItem('socials', JSON.stringify(defaultSocials));
+            socials.push(...defaultSocials);
+        }
         
-        linksData.forEach(link => {
+        elements.socialsGrid.innerHTML = '';
+        socials.forEach(social => {
+            const socialElement = document.createElement('a');
+            socialElement.className = 'social-link';
+            socialElement.href = social.url;
+            socialElement.target = '_blank';
+            socialElement.innerHTML = `
+                <div class="social-icon">
+                    <i class="${social.icon}"></i>
+                </div>
+                <div class="social-text">
+                    <div class="social-name">${social.text}</div>
+                    <div class="social-url">${social.url}</div>
+                </div>
+                <i class="fas fa-chevron-right"></i>
+            `;
+            elements.socialsGrid.appendChild(socialElement);
+        });
+    };
+
+    // Загрузка кастомных ссылок
+    const loadCustomLinks = () => {
+        const links = JSON.parse(localStorage.getItem('customLinks') || '[]');
+        
+        if (links.length === 0) {
+            const defaultLinks = [
+                { title: 'My NextJS Blog Post', url: 'https://example.com', icon: 'fas fa-blog' },
+                { title: 'FunPay Shop', url: 'https://funpay.com', icon: 'fas fa-store' },
+                { title: 'My Telegram', url: 'https://t.me/agushenka', icon: 'fab fa-telegram' },
+                { title: 'Telegram Channel', url: 'https://t.me/agushenka_channel', icon: 'fab fa-telegram-plane' }
+            ];
+            localStorage.setItem('customLinks', JSON.stringify(defaultLinks));
+            links.push(...defaultLinks);
+        }
+        
+        elements.customLinksList.innerHTML = '';
+        links.forEach(link => {
             const linkElement = document.createElement('a');
-            linkElement.className = 'link-item';
+            linkElement.className = 'custom-link';
             linkElement.href = link.url;
             linkElement.target = '_blank';
             linkElement.innerHTML = `
+                <div class="link-icon">
+                    <i class="${link.icon}"></i>
+                </div>
                 <div class="link-content">
-                    <div class="link-icon">
-                        <i class="${link.icon}"></i>
-                    </div>
-                    <div>
-                        <div class="link-title">${link.title}</div>
-                        <div class="link-description">${link.description}</div>
-                    </div>
+                    <div class="link-title">${link.title}</div>
+                    <div class="link-url">${link.url}</div>
                 </div>
-                <div class="link-arrow">
-                    <i class="fas fa-chevron-right"></i>
-                </div>
+                <i class="fas fa-chevron-right"></i>
             `;
-            linksContainer.appendChild(linkElement);
+            elements.customLinksList.appendChild(linkElement);
         });
-    }
-    
-    // Функция загрузки настроек из localStorage
-    function loadSettings() {
-        const savedTheme = localStorage.getItem('profileTheme') || 'dark';
-        const savedBgImage = localStorage.getItem('profileBgImage') || '';
-        const savedMusicUrl = localStorage.getItem('profileMusicUrl') || 'assets/audio/background-music.mp3';
-        const savedAutoPlay = localStorage.getItem('profileAutoPlay') === 'true';
-        const savedTelegram = localStorage.getItem('profileTelegram') || 'https://t.me/ago106';
-        const savedDiscord = localStorage.getItem('profileDiscord') || 'https://discord.gg/spacerb';
+    };
+
+    // Загрузка медиа
+    const loadMediaEmbed = () => {
+        const embed = JSON.parse(localStorage.getItem('mediaEmbed') || '{}');
         
-        // Применение темы
-        themeSelect.value = savedTheme;
-        document.body.className = savedTheme + '-theme';
-        
-        // Применение фонового изображения
-        if (savedBgImage) {
-            headerBackground.style.background = `linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('${savedBgImage}')`;
-            headerBackground.style.backgroundSize = 'cover';
-            headerBackground.style.backgroundPosition = 'center';
+        if (!embed.url) {
+            embed.url = 'https://www.youtube.com/embed/xwfZjp5Pg60';
+            embed.title = 'My Favorite YouTube Video!';
+            localStorage.setItem('mediaEmbed', JSON.stringify(embed));
         }
         
-        bgImageInput.value = savedBgImage;
-        musicInput.value = savedMusicUrl;
-        autoPlayCheckbox.checked = savedAutoPlay;
-        telegramInput.value = savedTelegram;
-        discordInput.value = savedDiscord;
+        elements.mediaEmbed.innerHTML = `
+            <iframe src="${embed.url}" 
+                    title="${embed.title}" 
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                    allowfullscreen>
+            </iframe>
+        `;
+    };
+
+    // Настройки музыки
+    const loadMusicSettings = () => {
+        const musicSettings = JSON.parse(localStorage.getItem('musicSettings') || '{}');
         
-        // Обновление музыки
-        backgroundMusic.src = savedMusicUrl;
-        
-        if (savedAutoPlay) {
-            backgroundMusic.play().catch(e => console.log("Автовоспроизведение заблокировано"));
-            musicStatus.textContent = 'Музыка: Вкл';
-            playIcon.className = 'fas fa-pause';
+        if (musicSettings.volume) {
+            elements.audio.volume = musicSettings.volume / 100;
+            elements.volumeSlider.value = musicSettings.volume;
         }
         
-        // Обновление ссылок в данных
-        linksData[0].url = savedTelegram;
-        linksData[1].url = savedDiscord;
-        loadLinks();
-    }
-    
-    // Функция сохранения настроек
-    function saveSettings() {
-        localStorage.setItem('profileTheme', themeSelect.value);
-        localStorage.setItem('profileBgImage', bgImageInput.value);
-        localStorage.setItem('profileMusicUrl', musicInput.value);
-        localStorage.setItem('profileAutoPlay', autoPlayCheckbox.checked);
-        localStorage.setItem('profileTelegram', telegramInput.value);
-        localStorage.setItem('profileDiscord', discordInput.value);
-        
-        // Применение новых настроек
-        document.body.className = themeSelect.value + '-theme';
-        
-        if (bgImageInput.value) {
-            headerBackground.style.background = `linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('${bgImageInput.value}')`;
-            headerBackground.style.backgroundSize = 'cover';
-            headerBackground.style.backgroundPosition = 'center';
-        } else {
-            headerBackground.style.background = 'linear-gradient(135deg, var(--primary-color), #3b0764)';
+        if (musicSettings.autoplay) {
+            elements.audio.play().catch(e => console.log("Автовоспроизведение заблокировано"));
+            elements.playPauseBtn.innerHTML = '<i class="fas fa-pause"></i>';
+        }
+    };
+
+    // Инициализация анимаций
+    const initAnimations = () => {
+        // Эффект наклона для карточек
+        if (localStorage.getItem('tiltEffect') !== 'false') {
+            initTiltEffect();
         }
         
-        backgroundMusic.src = musicInput.value;
-        
-        if (autoPlayCheckbox.checked) {
-            backgroundMusic.play().catch(e => console.log("Автовоспроизведение заблокировано"));
-            musicStatus.textContent = 'Музыка: Вкл';
-            playIcon.className = 'fas fa-pause';
+        // Кастомный курсор
+        if (localStorage.getItem('cursorEffect') !== 'false') {
+            initCustomCursor();
         }
         
-        // Обновление ссылок
-        linksData[0].url = telegramInput.value;
-        linksData[1].url = discordInput.value;
-        loadLinks();
+        // Анимация печатания
+        if (localStorage.getItem('typingEffect') !== 'none') {
+            initTypingEffect();
+        }
         
-        // Закрытие панели настроек
-        settingsPanel.classList.remove('active');
+        // Сверкание имени
+        if (localStorage.getItem('usernameSparkle') !== 'false') {
+            initUsernameSparkle();
+        }
         
-        // Уведомление о сохранении
-        alert('Настройки сохранены!');
-    }
-    
-    // Функция сброса настроек
-    function resetSettings() {
-        if (confirm('Вы уверены, что хотите сбросить все настройки?')) {
-            localStorage.clear();
-            loadSettings();
-            alert('Настройки сброшены к значениям по умолчанию!');
+        // Украшение аватара
+        if (localStorage.getItem('avatarDecoration') !== 'false') {
+            initAvatarDecoration();
         }
-    }
-    
-    // Управление музыкой
-    function toggleMusic() {
-        if (backgroundMusic.paused) {
-            backgroundMusic.play();
-            musicStatus.textContent = 'Музыка: Вкл';
-            playIcon.className = 'fas fa-pause';
-        } else {
-            backgroundMusic.pause();
-            musicStatus.textContent = 'Музыка: Выкл';
-            playIcon.className = 'fas fa-play';
-        }
-    }
-    
-    // Обновление громкости
-    function updateVolume() {
-        backgroundMusic.volume = volumeSlider.value / 100;
-    }
-    
-    // Обновление прогресса воспроизведения
-    function updateProgress() {
-        if (backgroundMusic.duration) {
-            const progressPercent = (backgroundMusic.currentTime / backgroundMusic.duration) * 100;
-            progressSlider.value = progressPercent;
-        }
-    }
-    
-    // Перемотка музыки
-    function seekMusic() {
-        const seekTime = (progressSlider.value / 100) * backgroundMusic.duration;
-        backgroundMusic.currentTime = seekTime;
-    }
-    
-    // События
-    openSettingsBtn.addEventListener('click', () => {
-        settingsPanel.classList.add('active');
-    });
-    
-    closeSettingsBtn.addEventListener('click', () => {
-        settingsPanel.classList.remove('active');
-    });
-    
-    saveSettingsBtn.addEventListener('click', saveSettings);
-    resetSettingsBtn.addEventListener('click', resetSettings);
-    toggleMusicBtn.addEventListener('click', toggleMusic);
-    
-    playPauseBtn.addEventListener('click', () => {
-        if (backgroundMusic.paused) {
-            backgroundMusic.play();
-            playIcon.className = 'fas fa-pause';
-        } else {
-            backgroundMusic.pause();
-            playIcon.className = 'fas fa-play';
-        }
-    });
-    
-    volumeSlider.addEventListener('input', updateVolume);
-    
-    backgroundMusic.addEventListener('timeupdate', updateProgress);
-    progressSlider.addEventListener('input', seekMusic);
-    
-    // Инициализация
-    loadBadges();
-    loadLinks();
-    loadSettings();
-    
-    // Установка начальной громкости
-    backgroundMusic.volume = volumeSlider.value / 100;
-    
-    // Добавление обработчика для добавления новой ссылки
-    document.getElementById('addLinkBtn').addEventListener('click', () => {
-        const title = prompt('Введите название ссылки:');
-        if (title) {
-            const url = prompt('Введите URL ссылки:');
-            if (url) {
-                const description = prompt('Введите описание ссылки:') || '';
-                const icon = prompt('Введите иконку (FontAwesome класс, например: fab fa-twitter):') || 'fas fa-link';
+    };
+
+    // Эффект наклона
+    const initTiltEffect = () => {
+        const socialLinks = document.querySelectorAll('.social-link');
+        socialLinks.forEach(link => {
+            link.addEventListener('mousemove', (e) => {
+                const rect = link.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
                 
-                linksData.push({
-                    id: linksData.length + 1,
-                    title: title,
-                    description: description,
-                    url: url,
-                    icon: icon
-                });
+                const centerX = rect.width / 2;
+                const centerY = rect.height / 2;
                 
-                loadLinks();
-                alert('Ссылка добавлена!');
+                const rotateY = (x - centerX) / 10;
+                const rotateX = (centerY - y) / 10;
+                
+                link.style.transform = `perspective(500px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+            });
+            
+            link.addEventListener('mouseleave', () => {
+                link.style.transform = 'perspective(500px) rotateX(0deg) rotateY(0deg)';
+            });
+        });
+    };
+
+    // Кастомный курсор
+    const initCustomCursor = () => {
+        document.addEventListener('mousemove', (e) => {
+            elements.cursor.style.left = e.clientX + 'px';
+            elements.cursor.style.top = e.clientY + 'px';
+        });
+        
+        // Эффект при наведении на кликабельные элементы
+        const interactiveElements = document.querySelectorAll('a, button, .social-link, .custom-link');
+        interactiveElements.forEach(el => {
+            el.addEventListener('mouseenter', () => {
+                elements.cursor.style.transform = 'scale(1.5)';
+                elements.cursor.style.background = 'var(--secondary-color)';
+            });
+            
+            el.addEventListener('mouseleave', () => {
+                elements.cursor.style.transform = 'scale(1)';
+                elements.cursor.style.background = 'var(--primary-color)';
+            });
+        });
+    };
+
+    // Анимация печатания
+    const initTypingEffect = () => {
+        const text = elements.typingText.textContent;
+        elements.typingText.textContent = '';
+        
+        let i = 0;
+        const typeWriter = () => {
+            if (i < text.length) {
+                elements.typingText.textContent += text.charAt(i);
+                i++;
+                setTimeout(typeWriter, 50);
             }
+        };
+        
+        // Запуск с задержкой
+        setTimeout(typeWriter, 1000);
+    };
+
+    // Сверкание имени
+    const initUsernameSparkle = () => {
+        setInterval(() => {
+            const sparkle = document.querySelector('.username-sparkle');
+            sparkle.style.animation = 'none';
+            setTimeout(() => {
+                sparkle.style.animation = 'sparkle 3s infinite';
+            }, 10);
+        }, 3000);
+    };
+
+    // Украшение аватара
+    const initAvatarDecoration = () => {
+        const decoration = document.querySelector('.avatar-decoration');
+        decoration.style.display = 'block';
+        
+        // Случайное изменение цвета каждые 5 секунд
+        setInterval(() => {
+            const colors = ['#7c3aed', '#10b981', '#f59e0b', '#ef4444', '#8b5cf6'];
+            const randomColor = colors[Math.floor(Math.random() * colors.length)];
+            decoration.style.borderColor = randomColor;
+        }, 5000);
+    };
+
+    // Управление музыкой
+    elements.playPauseBtn.addEventListener('click', () => {
+        if (elements.audio.paused) {
+            elements.audio.play();
+            elements.playPauseBtn.innerHTML = '<i class="fas fa-pause"></i>';
+        } else {
+            elements.audio.pause();
+            elements.playPauseBtn.innerHTML = '<i class="fas fa-play"></i>';
         }
     });
-    
-    // Добавление обработчиков для переключения треков
-    document.getElementById('prevBtn').addEventListener('click', () => {
-        alert('Функция переключения на предыдущий трек будет реализована позже');
+
+    elements.nextTrackBtn.addEventListener('click', () => {
+        // Здесь будет логика переключения треков
+        alert('Следующий трек');
     });
-    
-    document.getElementById('nextBtn').addEventListener('click', () => {
-        alert('Функция переключения на следующий трек будет реализована позже');
+
+    elements.volumeSlider.addEventListener('input', (e) => {
+        elements.audio.volume = e.target.value / 100;
+        localStorage.setItem('musicSettings', JSON.stringify({
+            volume: e.target.value,
+            autoplay: !elements.audio.paused
+        }));
     });
+
+    // Сохранение состояния музыки при закрытии
+    window.addEventListener('beforeunload', () => {
+        localStorage.setItem('musicSettings', JSON.stringify({
+            volume: elements.volumeSlider.value,
+            autoplay: !elements.audio.paused
+        }));
+    });
+
+    // Загрузка всех настроек
+    loadSettings();
 });
