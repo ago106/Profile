@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Настройки профиля - Agushenka</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body class="admin-page">
+    <div class="admin-container">
+        <!-- Боковое меню -->
+        <aside class="admin-sidebar">
+            <div class="admin-logo">
+                <h2><i class="fas fa-user-cog"></i> Agushenka</h2>
+                <p>Управление профилем</p>
+            </div>
+            
+            <nav class="admin-nav">
+                <ul>
+                    <li class="active" data-tab="general">
+                        <i class="fas fa-cog"></i> Основные
+                    </li>
+                    <li data-tab="cosmetic">
+                        <i class="fas fa-palette"></i> Внешний вид
+                    </li>
+                    <li data-tab="social">
+                        <i class="fas fa-share-alt"></i> Социальные сети
+                    </li>
+                    <li data-tab="links">
+                        <i class="fas fa-link"></i> Кастомные ссылки
+                    </li>
+                    <li data-tab="media">
+                        <i class="fas fa-film"></i> Медиа
+                    </li>
+                    <li data-tab="files">
+                        <i class="fas fa-file-upload"></i> Файлы
+                    </li>
+                    <li data-tab="badges">
+                        <i class="fas fa-award"></i> Значки
+                    </li>
+                </ul>
+            </nav>
+            
+            <div class="admin-actions">
+                <button class="btn-save-all" id="saveAllBtn">
+                    <i class="fas fa-save"></i> Сохранить всё
+                </button>
+                <button class="btn-preview" id="previewBtn">
+                    <i class="fas fa-eye"></i> Предпросмотр
+                </button>
+                <a href="index.html" class="btn-view-profile">
+                    <i class="fas fa-external-link-alt"></i> Посмотреть профиль
+                </a>
+            </div>
+        </aside>
+        
+        <!-- Основной контент настроек -->
+        <main class="admin-content">
+            <!-- Заголовок -->
+            <header class="admin-header">
+                <h1 id="adminTabTitle">Основные настройки</h1>
+                <p id="adminTabDescription">Управление основными параметрами профиля</p>
+            </header>
+            
+            <!-- Табы с настройками -->
+            <div class="admin-tabs">
+                <!-- Вкладка 1: Основные настройки -->
+                <div class="tab-content active" id="tab-general">
+                    <div class="settings-card">
+                        <h3><i class="fas fa-globe"></i> Основные настройки</h3>
+                        
+                        <div class="form-group">
+                            <label for="profileUrl">URL профиля</label>
+                            <div class="input-with-prefix">
+                                <span class="input-prefix">e-z.bio/</span>
+                                <input type="text" id="profileUrl" value="ago106">
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="aliasUrl">Альтернативный URL</label>
+                            <div class="input-with-prefix">
+                                <span class="input-prefix">e-z.bio/</span>
+                                <input type="text" id="aliasUrl" value="agushenka">
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="pageTitle">Заголовок страницы</label>
+                            <input type="text" id="pageTitle" value="ENKA-VIKOS-AGUSH">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="displayName">Отображаемое имя</label>
+                            <input type="text" id="displayName" value="Agushenka">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="animatedTitle">Анимированный заголовок</label>
+                            <select id="animatedTitle">
+                                <option value="none">Без анимации</option>
+                                <option value="typing">Эффект печатания</option>
+                                <option value="glitch">Глитч эффект</option>
+                                <option value="fade">Появление</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="profileDescription">Описание</label>
+                            <textarea id="profileDescription" rows="4">◆ Days, weeks, months may pass — but our meeting is inevitable. ◆
+◊ However long it takes, we will wait for one another. ◊</textarea>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="typingEffect">Эффект печатания</label>
+                            <select id="typingEffect">
+                                <option value="typewriter">Машинопись</option>
+                                <option value="smooth">Плавный</option>
+                                <option value="blink">Мерцающий курсор</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-actions">
+                            <button class="btn-primary" id="saveGeneralBtn">
+                                <i class="fas fa-save"></i> Сохранить изменения
+                            </button>
+                            <button class="btn-secondary" id="resetGeneralBtn">
+                                <i class="fas fa-undo"></i> Сбросить
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Вкладка 2: Внешний вид -->
+                <div class="tab-content" id="tab-cosmetic">
+                    <div class="settings-card">
+                        <h3><i class="fas fa-palette"></i> Настройки внешнего вида</h3>
+                        
+                        <div class="color-settings">
+                            <div class="form-group">
+                                <label for="primaryColor">Основной цвет</label>
+                                <input type="color" id="primaryColor" value="#7c3aed">
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="secondaryColor">Вторичный цвет</label>
+                                <input type="color" id="secondaryColor" value="#10b981">
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="accentColor">Акцентный цвет</label>
+                                <input type="color" id="accentColor" value="#f59e0b">
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="textColor">Цвет текста</label>
+                                <input type="color" id="textColor" value="#f8fafc">
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="backgroundColor">Цвет фона</label>
+                                <input type="color" id="backgroundColor" value="#0f172a">
+                            </div>
+                        </div>
+                        
+                        <div class="toggle-settings">
+                            <div class="toggle-group">
+                                <input type="checkbox" id="showViews" checked>
+                                <label for="showViews">Показывать счетчик просмотров</label>
+                            </div>
+                            
+                            <div class="toggle-group">
+                                <input type="checkbox" id="showBadges" checked>
+                                <label for="showBadges">Показывать значки</label>
+                            </div>
+                            
+                            <div class="toggle-group">
+                                <input type="checkbox" id="animations" checked>
+                                <label for="animations">Анимации</label>
+                            </div>
+                            
+                            <div class="toggle-group">
+                                <input type="checkbox" id="tiltEffect" checked>
+                                <label for="tiltEffect">Эффект наклона</label>
+                            </div>
+                            
+                            <div class="toggle-group">
+                                <input type="checkbox" id="usernameSparkle" checked>
+                                <label for="usernameSparkle">Сверкание имени</label>
+                            </div>
+                            
+                            <div class="toggle-group">
+                                <input type="checkbox" id="cursorEffect" checked>
+                                <label for="cursorEffect">Кастомный курсор</label>
+                            </div>
+                            
+                            <div class="toggle-group">
+                                <input type="checkbox" id="avatarDecoration" checked>
+                                <label for="avatarDecoration">Украшение аватара</label>
+                            </div>
+                            
+                            <div class="toggle-group">
+                                <input type="checkbox" id="themeColoredIcons" checked>
+                                <label for="themeColoredIcons">Иконки в цвет темы</label>
+                            </div>
+                        </div>
+                        
+                        <div class="slider-settings">
+                            <div class="form-group">
+                                <label for="opacity">Прозрачность: <span id="opacityValue">75</span>%</label>
+                                <input type="range" id="opacity" min="0" max="100" value="75">
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="blur">Размытие: <span id="blurValue">5</span>px</label>
+                                <input type="range" id="blur" min="0" max="20" value="5">
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="borderRadius">Скругление: <span id="borderRadiusValue">15</span>px</label>
+                                <input type="range" id="borderRadius" min="0" max="30" value="15">
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="backgroundBlur">Размытие фона: <span id="backgroundBlurValue">10</span>px</label>
+                                <input type="range" id="backgroundBlur" min="0" max="50" value="10">
+                            </div>
+                        </div>
+                        
+                        <div class="form-actions">
+                            <button class="btn-primary" id="saveCosmeticBtn">
+                                <i class="fas fa-paint-brush"></i> Применить стиль
+                            </button>
+                            <button class="btn-secondary" id="themeResetBtn">
+                                <i class="fas fa-undo"></i> Сбросить к стандартному
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Вкладка 3: Социальные сети -->
+                <div class="tab-content" id="tab-social">
+                    <div class="settings-card">
+                        <h3><i class="fas fa-share-alt"></i> Социальные сети</h3>
+                        
+                        <div class="social-platforms">
+                            <h4>Добавить социальную сеть</h4>
+                            
+                            <div class="form-group">
+                                <label for="socialPlatform">Платформа</label>
+                                <select id="socialPlatform">
+                                    <option value="discord">Discord</option>
+                                    <option value="telegram">Telegram</option>
+                                    <option value="youtube">YouTube</option>
+                                    <option value="github">GitHub</option>
+                                    <option value="twitter">Twitter</option>
+                                    <option value="instagram">Instagram</option>
+                                    <option value="vkontakte">VKontakte</option>
+                                    <option value="spotify">Spotify</option>
+                                    <option value="twitch">Twitch</option>
+                                    <option value="custom">Другая</option>
+                                </select>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="socialUrl">Ссылка</label>
+                                <input type="text" id="socialUrl" placeholder="https://...">
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="socialText">Текст</label>
+                                <input type="text" id="socialText" placeholder="Мой Telegram канал">
+                            </div>
+                            
+                            <button class="btn-primary" id="addSocialBtn">
+                                <i class="fas fa-plus"></i> Добавить
+                            </button>
+                        </div>
+                        
+                        <div class="active-socials">
+                            <h4>Активные социальные сети</h4>
+                            <div class="sortable-list" id="activeSocials">
+                                <!-- Социальные сети будут добавляться динамически -->
+                            </div>
+                        </div>
+                        
+                        <div class="discord-settings">
+                            <h4>Discord</h4>
+                            <div class="form-group">
+                                <label for="discordInvite">Приглашение Discord</label>
+                                <input type="text" id="discordInvite" value="https://discord.gg/spacerb">
+                            </div>
+                            <div class="toggle-group">
+                                <input type="checkbox" id="showDiscordPresence" checked>
+                                <label for="showDiscordPresence">Показывать Discord Presence</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Вкладка 4: Кастомные ссылки -->
+                <div class="tab-content" id="tab-links">
+                    <div class="settings-card">
+                        <h3><i class="fas fa-link"></i> Кастомные ссылки</h3>
+                        
+                        <div class="add-link-form">
+                            <h4>Добавить кастомную ссылку</h4>
+                            
+                            <div class="form-group">
+                                <label for="linkTitle">Заголовок</label>
+                                <input type="text" id="linkTitle" placeholder="Мой блог на NextJS">
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="linkUrl">Ссылка</label>
+                                <input type="text" id="linkUrl" placeholder="https://example.com">
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="linkIcon">Иконка (Font Awesome класс)</label>
+                                <input type="text" id="linkIcon" placeholder="fas fa-blog">
+                            </div>
+                            
+                            <button class="btn-primary" id="addCustomLinkBtn">
+                                <i class="fas fa-plus"></i> Добавить ссылку
+                            </button>
+                        </div>
+                        
+                        <div class="active-links">
+                            <h4>Активные кастомные ссылки</h4>
+                            <div class="toggle-group">
+                                <input type="checkbox" id="showLinkUrl" checked>
+                                <label for="showLinkUrl">Показывать URL ссылок</label>
+                            </div>
+                            
+                            <div class="sortable-list" id="customLinksList">
+                                <!-- Кастомные ссылки будут добавляться динамически -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Вкладка 5: Медиа -->
+                <div class="tab-content" id="tab-media">
+                    <div class="settings-card">
+                        <h3><i class="fas fa-film"></i> Медиа</h3>
+                        
+                        <div class="embed-settings">
+                            <h4>Встроенное медиа</h4>
+                            
+                            <div class="form-group">
+                                <label for="embedTitle">Заголовок медиа</label>
+                                <input type="text" id="embedTitle" value="Мое любимое видео на YouTube!">
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="embedUrl">URL медиа</label>
+                                <input type="text" id="embedUrl" value="https://www.youtube.com/watch?v=xwfZjp5Pg60">
+                            </div>
+                            
+                            <div class="toggle-group">
+                                <input type="checkbox" id="embedOpenByDefault" checked>
+                                <label for="embedOpenByDefault">Открывать по умолчанию</label>
+                            </div>
+                            
+                            <button class="btn-primary" id="saveEmbedBtn">
+                                <i class="fas fa-save"></i> Сохранить медиа
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Вкладка 6: Файлы -->
+                <div class="tab-content" id="tab-files">
+                    <div class="settings-card">
+                        <h3><i class="fas fa-file-upload"></i> Загрузка файлов</h3>
+                        
+                        <div class="file-upload-section">
+                            <div class="upload-item">
+                                <h4>Аватар</h4>
+                                <div class="upload-preview">
+                                    <img src="assets/images/avatar.jpg" id="avatarPreview" alt="Аватар">
+                                </div>
+                                <div class="upload-controls">
+                                    <input type="file" id="avatarUpload" accept="image/*" hidden>
+                                    <button class="btn-upload" onclick="document.getElementById('avatarUpload').click()">
+                                        <i class="fas fa-upload"></i> Загрузить аватар
+                                    </button>
+                                    <button class="btn-secondary" id="useDiscordAvatarBtn">
+                                        <i class="fab fa-discord"></i> Использовать Discord аватар
+                                    </button>
+                                </div>
+                            </div>
+                            
+                            <div class="upload-item">
+                                <h4>Фоновое изображение/Баннер</h4>
+                                <div class="upload-preview">
+                                    <img src="assets/images/banner.jpg" id="bannerPreview" alt="Баннер">
+                                </div>
+                                <div class="upload-controls">
+                                    <input type="file" id="bannerUpload" accept="image/*" hidden>
+                                    <button class="btn-upload" onclick="document.getElementById('bannerUpload').click()">
+                                        <i class="fas fa-upload"></i> Загрузить баннер
+                                    </button>
+                                    <button class="btn-secondary" id="removeBannerBtn">
+                                        <i class="fas fa-trash"></i> Удалить баннер
+                                    </button>
+                                </div>
+                            </div>
+                            
+                            <div class="upload-item">
+                                <h4>Кастомный курсор</h4>
+                                <div class="upload-preview">
+                                    <img src="assets/images/cursor.png" id="cursorPreview" alt="Курсор">
+                                </div>
+                                <div class="upload-controls">
+                                    <input type="file" id="cursorUpload" accept="image/*" hidden>
+                                    <button class="btn-upload" onclick="document.getElementById('cursorUpload').click()">
+                                        <i class="fas fa-upload"></i> Загрузить курсор
+                                    </button>
+                                </div>
+                            </div>
+                            
+                            <div class="upload-item">
+                                <h4>Фоновая музыка</h4>
+                                <div class="music-list" id="musicList">
+                                    <!-- Список треков -->
+                                </div>
+                                <div class="upload-controls">
+                                    <input type="file" id="musicUpload" accept="audio/*" multiple hidden>
+                                    <button class="btn-upload" onclick="document.getElementById('musicUpload').click()">
+                                        <i class="fas fa-upload"></i> Загрузить музыку
+                                    </button>
+                                </div>
+                            </div>
+                            
+                            <div class="music-settings">
+                                <div class="toggle-group">
+                                    <input type="checkbox" id="autoplayFix" checked>
+                                    <label for="autoplayFix">Autoplay Fix</label>
+                                </div>
+                                
+                                <div class="toggle-group">
+                                    <input type="checkbox" id="useBackgroundAudio">
+                                    <label for="useBackgroundAudio">Использовать аудио фонового видео</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Вкладка 7: Значки -->
+                <div class="tab-content" id="tab-badges">
+                    <div class="settings-card">
+                        <h3><i class="fas fa-award"></i> Управление значками</h3>
+                        
+                        <div class="available-badges">
+                            <h4>Доступные значки</h4>
+                            <div class="badges-selector" id="badgesSelector">
+                                <!-- Значки для выбора -->
+                            </div>
+                        </div>
+                        
+                        <div class="selected-badges">
+                            <h4>Активные значки</h4>
+                            <div class="sortable-list" id="selectedBadgesList">
+                                <!-- Выбранные значки -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="admin.js"></script>
+</body>
+</html>
