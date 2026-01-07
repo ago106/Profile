@@ -5,74 +5,39 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Agushenka</title>
     <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
-    <!-- Background Video/Audio -->
-    <video class="background" autoplay muted loop playsinline>
-        <source src="assets/background.mp4" type="video/mp4">
-        <!-- Fallback если видео не поддерживается -->
-    </video>
-    
-    <!-- Фоновая музыка -->
+    <img class="background" src="assets/background.mp4" alt="Background">
     <audio id="bg-music" autoplay loop>
         <source src="assets/audio/unhappy.mp3" type="audio/mpeg">
     </audio>
 
-    <!-- Profile Container -->
+    <div class="achievements-circle">
+        <img src="assets/badge1.png" alt="Achievement 1" class="badge">
+        <img src="assets/badge2.png" alt="Achievement 2" class="badge">
+    </div>
+
     <div class="profile">
-        <div class="avatar-container">
-            <img class="avatar" src="assets/avatar.png" alt="Avatar" onerror="this.style.display='none'">
-        </div>
-        
+        <img class="avatar" src="assets/avatar.png" alt="Avatar">
         <h1 class="animated-title">Agushenka</h1>
         <p class="description typing"></p>
-        
         <div class="socials">
-            <a href="https://discord.gg/example" target="_blank" class="social-icon">
-                <img src="assets/discord.png" alt="Discord" onerror="this.parentElement.style.display='none'">
-            </a>
-            <a href="https://youtube.com/example" target="_blank" class="social-icon">
-                <img src="assets/youtube.png" alt="YouTube" onerror="this.parentElement.style.display='none'">
-            </a>
-            <a href="https://example.com" target="_blank" class="social-icon">
-                <img src="assets/other.png" alt="Other" onerror="this.parentElement.style.display='none'">
-            </a>
+            <a href="YOUR_DISCORD_LINK"><img src="assets/discord.png" alt="Discord"></a>
+            <a href="YOUR_YOUTUBE_LINK"><img src="assets/youtube.png" alt="YouTube"></a>
+            <a href="YOUR_OTHER_LINK"><img src="assets/other.png" alt="Other"></a>
         </div>
-        
         <div class="custom-links">
-            <a href="https://github.com/ago106" class="link" target="_blank">
-                <span class="link-icon">👨‍💻</span>
-                <span class="link-text">GitHub</span>
-            </a>
-            <a href="https://funpay.com" class="link" target="_blank">
-                <span class="link-icon">🛒</span>
-                <span class="link-text">FunPay Shop</span>
-            </a>
-            <a href="https://t.me/donutsmp" class="link" target="_blank">
-                <span class="link-icon">💬</span>
-                <span class="link-text">My Telegram</span>
-            </a>
-            <a href="https://t.me/agush3nka" class="link" target="_blank">
-                <span class="link-icon">📢</span>
-                <span class="link-text">Telegram Channel</span>
-            </a>
+            <a href="ago106" class="link"><img src="assets/github.png" alt="GitHub"> GitHub</a>
+            <a href="YOUR_FUNPAY_LINK" class="link"><img src="assets/funpay.png" alt="FunPay"> FunPay Shop</a>
+            <a href="donutsmp" class="link"><img src="assets/telegram.png" alt="Telegram"> My Telegram</a>
+            <a href="agush3nka" class="link"><img src="assets/telegram.png" alt="Telegram"> Telegram Channel</a>
         </div>
-        
         <div class="view-count">
-            Views: 
-            <span class="counter">Loading...</span>
+            Views: <img src="https://views-counter.vercel.app/counter?page_id=agushenka-profile&style=flat" alt="Profile Views">
         </div>
-        
         <div class="discord-widget">
-            <p>Discord Server: <span id="discord-online">0</span> Online</p>
-            <a href="https://discord.gg/example" target="_blank" class="discord-button">
-                Join Server
-            </a>
-        </div>
-        
-        <div class="achievements" id="achievements-container">
-            <!-- Achievements will be added by JS if images exist -->
+            <p>Discord Server: <span id="discord-online"></span> Online / 12,260 Members</p>
+            <a href="YOUR_INVITE_LINK"><img src="https://discord.com/api/guilds/1406607908577218681/widget.png?style=shield" alt="Join Server"></a>
         </div>
     </div>
 
