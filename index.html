@@ -1,59 +1,174 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Your Profile Page</title> <!-- Customize: Change page title here -->
+    <title>ago106 | Персональный профиль</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/x-icon" href="assets/images/avatar.jpg">
 </head>
 <body>
-    <!-- Background video or image: Uncomment video for video bg, or use CSS for image -->
-    <!-- <video autoplay muted loop class="background-video">
-        <source src="bg.mp4" type="video/mp4"> <!-- Add your video file -->
-    </video> -->
-
     <div class="container">
-        <!-- Avatar section -->
-        <img class="avatar" src="avatar.png" alt="Your Avatar"> <!-- Add your avatar image file -->
-
-        <!-- Name and title (animated) -->
-        <h1 class="name animated-title">Your Name</h1> <!-- Customize: Your display name -->
-
-        <!-- Bio/description -->
-        <p class="bio">Days, weeks, months may pass — but our meeting is inevitable. ♥ However long it takes, we will wait for one another. ♡</p> <!-- Customize: Your bio text -->
-
-        <!-- Badges section (like Staff, Premium, etc. – add more as spans) -->
-        <div class="badges">
-            <span class="badge premium">💎 Premium</span>
-            <span class="badge staff">✨ Staff</span>
-            <span class="badge donor">💰 Donor</span>
-            <span class="badge verified">✅ Verified</span>
-            <!-- Add more badges here, e.g., <span class="badge helper">🛠 Helper</span> -->
+        <!-- Меню настроек -->
+        <div class="settings-panel" id="settingsPanel">
+            <div class="settings-header">
+                <h3><i class="fas fa-cog"></i> Настройки</h3>
+                <button class="close-settings" id="closeSettings"><i class="fas fa-times"></i></button>
+            </div>
+            <div class="settings-content">
+                <div class="settings-section">
+                    <h4>Внешний вид</h4>
+                    <div class="setting-item">
+                        <label>Тема:</label>
+                        <select id="themeSelect">
+                            <option value="dark">Темная</option>
+                            <option value="light">Светлая</option>
+                            <option value="purple">Фиолетовая</option>
+                        </select>
+                    </div>
+                    <div class="setting-item">
+                        <label>Фоновое изображение:</label>
+                        <input type="text" id="bgImageInput" placeholder="URL изображения">
+                    </div>
+                </div>
+                
+                <div class="settings-section">
+                    <h4>Музыка</h4>
+                    <div class="setting-item">
+                        <label>Фоновая музыка:</label>
+                        <input type="text" id="musicInput" placeholder="URL аудиофайла" value="assets/audio/background-music.mp3">
+                    </div>
+                    <div class="setting-item">
+                        <label>Автовоспроизведение:</label>
+                        <input type="checkbox" id="autoPlayCheckbox">
+                    </div>
+                </div>
+                
+                <div class="settings-section">
+                    <h4>Ссылки</h4>
+                    <div class="setting-item">
+                        <label>Telegram:</label>
+                        <input type="text" id="telegramInput" placeholder="@username" value="https://t.me/ago106">
+                    </div>
+                    <div class="setting-item">
+                        <label>Discord:</label>
+                        <input type="text" id="discordInput" placeholder="Сервер Discord" value="https://discord.gg/gunu">
+                    </div>
+                    <button class="btn-add-link" id="addLinkBtn"><i class="fas fa-plus"></i> Добавить ссылку</button>
+                </div>
+                
+                <div class="settings-actions">
+                    <button class="btn-save" id="saveSettings">Сохранить настройки</button>
+                    <button class="btn-reset" id="resetSettings">Сбросить</button>
+                </div>
+            </div>
         </div>
 
-        <!-- Social and custom links (add more <a> tags) -->
-        <div class="links">
-            <a href="https://github.com/yourusername" class="link-button">GitHub →</a>
-            <a href="https://discord.gg/yourinvite" class="link-button">Discord →</a>
-            <a href="https://t.me/yourchannel" class="link-button">Telegram Channel →</a>
-            <a href="https://youtube.com/yourchannel" class="link-button">YouTube →</a>
-            <!-- Add more links here, e.g., <a href="https://funpay.com" class="link-button">FunPay Shop →</a> -->
-        </div>
+        <!-- Основной контент -->
+        <div class="main-content">
+            <!-- Шапка профиля -->
+            <header class="profile-header">
+                <div class="header-bg" id="headerBackground"></div>
+                <div class="profile-info">
+                    <div class="avatar-container">
+                        <img src="assets/images/avatar.jpg" alt="Аватар ago106" class="avatar">
+                        <div class="online-status"></div>
+                    </div>
+                    <div class="profile-details">
+                        <h1 class="username">ago106 <span class="badge-verified"><i class="fas fa-check-circle"></i></span></h1>
+                        <p class="user-tag">@agushenka</p>
+                        <p class="user-bio" id="userBio">Days, weeks, months may pass — but our meeting is inevitable. ♦♥ However long it takes, we will wait for one another. ♥</p>
+                        
+                        <div class="stats">
+                            <div class="stat-item">
+                                <span class="stat-number" id="viewCount">1,248</span>
+                                <span class="stat-label">просмотров</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-number" id="memberCount">12,260</span>
+                                <span class="stat-label">участников</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-number">811</span>
+                                <span class="stat-label">онлайн</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="header-actions">
+                    <button class="btn-settings" id="openSettings">
+                        <i class="fas fa-cog"></i> Настройки
+                    </button>
+                    <button class="btn-music" id="toggleMusic">
+                        <i class="fas fa-music"></i> <span id="musicStatus">Музыка: Вкл</span>
+                    </button>
+                </div>
+            </header>
 
-        <!-- Music player (add more <source> for multiple songs) -->
-        <audio controls autoplay loop class="music-player"> <!-- Remove 'autoplay' if you don't want it to start automatically -->
-            <source src="song1.mp3" type="audio/mpeg"> <!-- Add your MP3 file -->
-            <source src="song2.mp3" type="audio/mpeg"> <!-- Add another song -->
-            Your browser does not support the audio element.
-        </audio>
+            <!-- Значки профиля -->
+            <section class="badges-section">
+                <h2><i class="fas fa-award"></i> Значки профиля</h2>
+                <div class="badges-grid" id="badgesContainer">
+                    <!-- Значки будут добавляться динамически -->
+                </div>
+                <div class="badges-count">
+                    <span id="badgesCount">0</span> значков
+                </div>
+            </section>
 
-        <!-- View count placeholder (static – edit the number) -->
-        <div class="views">Total Views: 683</div> <!-- Customize: Update the number manually -->
+            <!-- Ссылки -->
+            <section class="links-section">
+                <h2><i class="fas fa-link"></i> Мои ссылки</h2>
+                <div class="links-list" id="linksContainer">
+                    <!-- Ссылки будут добавляться динамически -->
+                </div>
+            </section>
 
-        <!-- Media embed example (e.g., YouTube – add iframe or embed code) -->
-        <div class="media-embed">
-            <iframe width="560" height="315" src="https://www.youtube.com/embed/yourvideoID" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe> <!-- Customize: Replace with your embed URL -->
+            <!-- Музыкальный плеер -->
+            <section class="music-player-section">
+                <h2><i class="fas fa-headphones"></i> Фоновая музыка</h2>
+                <div class="music-player">
+                    <div class="track-info">
+                        <span id="trackTitle">Фоновая композиция</span>
+                        <span id="trackArtist">ago106</span>
+                    </div>
+                    <div class="player-controls">
+                        <button class="control-btn" id="prevBtn"><i class="fas fa-step-backward"></i></button>
+                        <button class="control-btn play-btn" id="playPauseBtn"><i class="fas fa-play" id="playIcon"></i></button>
+                        <button class="control-btn" id="nextBtn"><i class="fas fa-step-forward"></i></button>
+                        <div class="volume-control">
+                            <i class="fas fa-volume-up"></i>
+                            <input type="range" id="volumeSlider" min="0" max="100" value="50">
+                        </div>
+                    </div>
+                    <div class="progress-container">
+                        <input type="range" id="progressSlider" min="0" max="100" value="0">
+                    </div>
+                </div>
+            </section>
+
+            <!-- Футер -->
+            <footer class="footer">
+                <p>Профиль создан с помощью <span class="highlight">gunu.ld</span> стиля</p>
+                <p>Все права защищены © <span id="currentYear">2024</span> ago106</p>
+                <div class="footer-links">
+                    <a href="#" class="footer-link"><i class="fab fa-discord"></i> Discord</a>
+                    <a href="#" class="footer-link"><i class="fab fa-telegram"></i> Telegram</a>
+                    <a href="#" class="footer-link"><i class="fas fa-question-circle"></i> Помощь</a>
+                </div>
+            </footer>
         </div>
     </div>
+
+    <!-- Аудио элемент -->
+    <audio id="backgroundMusic" loop>
+        <source src="assets/audio/background-music.mp3" type="audio/mpeg">
+        Ваш браузер не поддерживает аудио элемент.
+    </audio>
+
+    <script src="script.js"></script>
 </body>
 </html>
