@@ -3,171 +3,160 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ago106 | Персональный профиль</title>
+    <title>AGUSHENKA | e-z.bio/ago106</title>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="icon" type="image/x-icon" href="assets/images/avatar.jpg">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="icon" href="assets/images/avatar.jpg">
 </head>
-<body>
-    <div class="container">
-        <!-- Меню настроек -->
-        <div class="settings-panel" id="settingsPanel">
-            <div class="settings-header">
-                <h3><i class="fas fa-cog"></i> Настройки</h3>
-                <button class="close-settings" id="closeSettings"><i class="fas fa-times"></i></button>
+<body class="theme-dark" data-animations="true">
+    <!-- Кастомный курсор -->
+    <div class="custom-cursor" id="customCursor"></div>
+    
+    <!-- Фоновое видео/изображение -->
+    <div class="background-media" id="backgroundMedia">
+        <div class="background-overlay"></div>
+    </div>
+    
+    <!-- Музыкальный плеер -->
+    <div class="music-player-container">
+        <audio id="backgroundAudio" loop>
+            <source src="assets/audio/song1.mp3" type="audio/mpeg">
+        </audio>
+        <div class="player-controls">
+            <button class="player-btn" id="playPauseBtn">
+                <i class="fas fa-play"></i>
+            </button>
+            <div class="track-info">
+                <span id="currentTrack">Its A Dream.mp3</span>
             </div>
-            <div class="settings-content">
-                <div class="settings-section">
-                    <h4>Внешний вид</h4>
-                    <div class="setting-item">
-                        <label>Тема:</label>
-                        <select id="themeSelect">
-                            <option value="dark">Темная</option>
-                            <option value="light">Светлая</option>
-                            <option value="purple">Фиолетовая</option>
-                        </select>
-                    </div>
-                    <div class="setting-item">
-                        <label>Фоновое изображение:</label>
-                        <input type="text" id="bgImageInput" placeholder="URL изображения">
-                    </div>
-                </div>
-                
-                <div class="settings-section">
-                    <h4>Музыка</h4>
-                    <div class="setting-item">
-                        <label>Фоновая музыка:</label>
-                        <input type="text" id="musicInput" placeholder="URL аудиофайла" value="assets/audio/background-music.mp3">
-                    </div>
-                    <div class="setting-item">
-                        <label>Автовоспроизведение:</label>
-                        <input type="checkbox" id="autoPlayCheckbox">
-                    </div>
-                </div>
-                
-                <div class="settings-section">
-                    <h4>Ссылки</h4>
-                    <div class="setting-item">
-                        <label>Telegram:</label>
-                        <input type="text" id="telegramInput" placeholder="@username" value="https://t.me/ago106">
-                    </div>
-                    <div class="setting-item">
-                        <label>Discord:</label>
-                        <input type="text" id="discordInput" placeholder="Сервер Discord" value="https://discord.gg/gunu">
-                    </div>
-                    <button class="btn-add-link" id="addLinkBtn"><i class="fas fa-plus"></i> Добавить ссылку</button>
-                </div>
-                
-                <div class="settings-actions">
-                    <button class="btn-save" id="saveSettings">Сохранить настройки</button>
-                    <button class="btn-reset" id="resetSettings">Сбросить</button>
-                </div>
-            </div>
-        </div>
-
-        <!-- Основной контент -->
-        <div class="main-content">
-            <!-- Шапка профиля -->
-            <header class="profile-header">
-                <div class="header-bg" id="headerBackground"></div>
-                <div class="profile-info">
-                    <div class="avatar-container">
-                        <img src="assets/images/avatar.jpg" alt="Аватар ago106" class="avatar">
-                        <div class="online-status"></div>
-                    </div>
-                    <div class="profile-details">
-                        <h1 class="username">ago106 <span class="badge-verified"><i class="fas fa-check-circle"></i></span></h1>
-                        <p class="user-tag">@agushenka</p>
-                        <p class="user-bio" id="userBio">Days, weeks, months may pass — but our meeting is inevitable. ♦♥ However long it takes, we will wait for one another. ♥</p>
-                        
-                        <div class="stats">
-                            <div class="stat-item">
-                                <span class="stat-number" id="viewCount">1,248</span>
-                                <span class="stat-label">просмотров</span>
-                            </div>
-                            <div class="stat-item">
-                                <span class="stat-number" id="memberCount">12,260</span>
-                                <span class="stat-label">участников</span>
-                            </div>
-                            <div class="stat-item">
-                                <span class="stat-number">811</span>
-                                <span class="stat-label">онлайн</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="header-actions">
-                    <button class="btn-settings" id="openSettings">
-                        <i class="fas fa-cog"></i> Настройки
-                    </button>
-                    <button class="btn-music" id="toggleMusic">
-                        <i class="fas fa-music"></i> <span id="musicStatus">Музыка: Вкл</span>
-                    </button>
-                </div>
-            </header>
-
-            <!-- Значки профиля -->
-            <section class="badges-section">
-                <h2><i class="fas fa-award"></i> Значки профиля</h2>
-                <div class="badges-grid" id="badgesContainer">
-                    <!-- Значки будут добавляться динамически -->
-                </div>
-                <div class="badges-count">
-                    <span id="badgesCount">0</span> значков
-                </div>
-            </section>
-
-            <!-- Ссылки -->
-            <section class="links-section">
-                <h2><i class="fas fa-link"></i> Мои ссылки</h2>
-                <div class="links-list" id="linksContainer">
-                    <!-- Ссылки будут добавляться динамически -->
-                </div>
-            </section>
-
-            <!-- Музыкальный плеер -->
-            <section class="music-player-section">
-                <h2><i class="fas fa-headphones"></i> Фоновая музыка</h2>
-                <div class="music-player">
-                    <div class="track-info">
-                        <span id="trackTitle">Фоновая композиция</span>
-                        <span id="trackArtist">ago106</span>
-                    </div>
-                    <div class="player-controls">
-                        <button class="control-btn" id="prevBtn"><i class="fas fa-step-backward"></i></button>
-                        <button class="control-btn play-btn" id="playPauseBtn"><i class="fas fa-play" id="playIcon"></i></button>
-                        <button class="control-btn" id="nextBtn"><i class="fas fa-step-forward"></i></button>
-                        <div class="volume-control">
-                            <i class="fas fa-volume-up"></i>
-                            <input type="range" id="volumeSlider" min="0" max="100" value="50">
-                        </div>
-                    </div>
-                    <div class="progress-container">
-                        <input type="range" id="progressSlider" min="0" max="100" value="0">
-                    </div>
-                </div>
-            </section>
-
-            <!-- Футер -->
-            <footer class="footer">
-                <p>Профиль создан с помощью <span class="highlight">gunu.ld</span> стиля</p>
-                <p>Все права защищены © <span id="currentYear">2024</span> ago106</p>
-                <div class="footer-links">
-                    <a href="#" class="footer-link"><i class="fab fa-discord"></i> Discord</a>
-                    <a href="#" class="footer-link"><i class="fab fa-telegram"></i> Telegram</a>
-                    <a href="#" class="footer-link"><i class="fas fa-question-circle"></i> Помощь</a>
-                </div>
-            </footer>
+            <button class="player-btn" id="nextTrackBtn">
+                <i class="fas fa-forward"></i>
+            </button>
+            <input type="range" id="volumeSlider" min="0" max="100" value="50">
         </div>
     </div>
-
-    <!-- Аудио элемент -->
-    <audio id="backgroundMusic" loop>
-        <source src="assets/audio/background-music.mp3" type="audio/mpeg">
-        Ваш браузер не поддерживает аудио элемент.
-    </audio>
+    
+    <!-- Админ кнопка -->
+    <a href="admin.html" class="admin-button" target="_blank">
+        <i class="fas fa-cog"></i>
+    </a>
+    
+    <!-- Основной контент -->
+    <main class="profile-container">
+        <!-- Аватар с декором -->
+        <div class="avatar-section">
+            <div class="avatar-wrapper" id="avatarWrapper">
+                <img src="assets/images/avatar.jpg" alt="Agushenka" class="profile-avatar" id="profileAvatar">
+                <div class="avatar-decoration"></div>
+                <div class="online-status active"></div>
+            </div>
+            
+            <!-- Имя пользователя с эффектом -->
+            <h1 class="username" id="username">
+                <span class="username-sparkle">Agushenka</span>
+                <span class="verified-badge">
+                    <i class="fas fa-check-circle"></i>
+                </span>
+            </h1>
+            
+            <!-- Статистика -->
+            <div class="stats-container">
+                <div class="stat-item">
+                    <span class="stat-number" id="viewCount">1,847</span>
+                    <span class="stat-label">просмотров</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">811</span>
+                    <span class="stat-label">онлайн</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">12,260</span>
+                    <span class="stat-label">участников</span>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Описание с анимацией печатания -->
+        <div class="description-section">
+            <div class="typing-container">
+                <p class="typing-text" id="typingText">
+                    Days, weeks, months may pass — but our meeting is inevitable. ♦<br>
+                    However long it takes, we will wait for one another. ♥
+                </p>
+            </div>
+        </div>
+        
+        <!-- Значки -->
+        <div class="badges-section" id="badgesSection">
+            <h3 class="section-title">
+                <i class="fas fa-award"></i> Значки
+                <span class="badge-count">(12)</span>
+            </h3>
+            <div class="badges-grid" id="badgesGrid">
+                <!-- Значки загружаются через JS -->
+            </div>
+        </div>
+        
+        <!-- Социальные ссылки -->
+        <div class="socials-section">
+            <h3 class="section-title">
+                <i class="fas fa-link"></i> Ссылки
+            </h3>
+            <div class="socials-grid" id="socialsGrid">
+                <!-- Ссылки загружаются через JS -->
+            </div>
+        </div>
+        
+        <!-- Кастомные ссылки -->
+        <div class="custom-links-section" id="customLinksSection">
+            <h3 class="section-title">
+                <i class="fas fa-external-link-alt"></i> Мои ссылки
+            </h3>
+            <div class="custom-links-list" id="customLinksList">
+                <!-- Кастомные ссылки загружаются через JS -->
+            </div>
+        </div>
+        
+        <!-- Discord приглашение -->
+        <div class="discord-section">
+            <div class="discord-widget">
+                <div class="discord-header">
+                    <i class="fab fa-discord"></i>
+                    <h4>Holidarys Space Hub</h4>
+                </div>
+                <div class="discord-stats">
+                    <div class="discord-stat">
+                        <span class="online-dot"></span>
+                        <span>811</span> онлайн
+                    </div>
+                    <div class="discord-stat">
+                        <i class="fas fa-users"></i>
+                        <span>12,260</span> участников
+                    </div>
+                </div>
+                <a href="https://discord.gg/example" class="discord-join-btn" target="_blank">
+                    <i class="fab fa-discord"></i> Присоединиться
+                </a>
+            </div>
+        </div>
+        
+        <!-- Встроенный медиа контент -->
+        <div class="embed-section" id="embedSection">
+            <h3 class="section-title">
+                <i class="fas fa-play-circle"></i> Мое видео
+            </h3>
+            <div class="media-embed" id="mediaEmbed">
+                <!-- Встраиваемый контент -->
+            </div>
+        </div>
+        
+        <!-- Футер -->
+        <footer class="profile-footer">
+            <p>Создано с помощью <span class="highlight">e-z.bio</span></p>
+            <p>© 2024 Agushenka. Все права защищены.</p>
+        </footer>
+    </main>
 
     <script src="script.js"></script>
 </body>
