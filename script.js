@@ -52,9 +52,8 @@ document.addEventListener('DOMContentLoaded', function() {
     // Данные ссылок
     const linksData = [
         { id: 1, title: 'Telegram Channel', description: 'Мой Telegram канал', url: 'https://t.me/ago106', icon: 'fab fa-telegram' },
-        { id: 2, title: 'Discord Server', description: 'Присоединяйтесь к нашему Discord', url: 'https://discord.gg/gunu', icon: 'fab fa-discord' },
-        { id: 3, title: 'Runfoy Shop', description: 'Мой магазин', url: '#', icon: 'fas fa-shopping-bag' },
-        { id: 4, title: 'Holidarys Space Hub', description: 'Space Hub сообщество', url: '#', icon: 'fas fa-rocket' }
+        { id: 2, title: 'Discord Server', description: 'Присоединяйтесь к нашему Discord', url: 'https://discord.gg/spacerb', icon: 'fab fa-discord' },
+        { id: 3, title: 'FunPay Shop', description: 'Мой магазин', url: '#', icon: 'fas fa-shopping-bag' }
     ];
     
     // Функция форматирования чисел с запятыми
@@ -118,7 +117,7 @@ document.addEventListener('DOMContentLoaded', function() {
         const savedMusicUrl = localStorage.getItem('profileMusicUrl') || 'assets/audio/background-music.mp3';
         const savedAutoPlay = localStorage.getItem('profileAutoPlay') === 'true';
         const savedTelegram = localStorage.getItem('profileTelegram') || 'https://t.me/ago106';
-        const savedDiscord = localStorage.getItem('profileDiscord') || 'https://discord.gg/gunu';
+        const savedDiscord = localStorage.getItem('profileDiscord') || 'https://discord.gg/spacerb';
         
         // Применение темы
         themeSelect.value = savedTheme;
